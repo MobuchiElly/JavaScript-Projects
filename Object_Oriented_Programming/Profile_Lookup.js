@@ -51,7 +51,6 @@ const contacts = [
       return "No such contact";
     }
   }
-  
   }
   
   lookUpProfile("Akira", "likes");
