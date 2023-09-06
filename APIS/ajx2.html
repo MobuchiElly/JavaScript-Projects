@@ -18,9 +18,9 @@
             height: 10vh;
             border-radius: 8px;
         }
-        .flex-container:first-child{
+        /* .flex-container:first-child{
 
-        }
+        } */
     </style>
 </head>
 <body>
@@ -38,7 +38,7 @@
     
     xhr.open('GET', 'ajax2.txt');
     xhr.onload = () => {
-        if (xhr.status = 200)
+        if (xhr.status == 200)
         {
             fetchBtn.addEventListener('click', () => {
                 output.textContent= `${xhr.responseText}`;
