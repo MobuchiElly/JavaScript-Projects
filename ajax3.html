@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .flex-container{
+            display: flex;
+            flex-direction: column;
+            align-items:center;
+            justify-content: space-evenly;
+        }
+        .fetch-btn{
+            background-color:rgba(237, 217, 217, 0.913);
+            width: 10vw;
+            height: 10vh;
+            border-radius: 8px;
+        }
+        .usersHeader {
+            display: flex;
+            flex-direction: column;
+            
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+            font-size: 30px;
+        }
+
+        .usersHeader li {
+            list-style-type: none;
+            
+        }
+        .user{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: row;
+            background-color: #f4f4f4;
+            margin-bottom: 2px;
+        }
+    </style>
+</head>
+<body>
+    <div class="flex-container">
+        <div class="output">
+            <p >Fetch data to fill me</p>
+        </div>
+        <div  class="btn-div"><button class="fetch-btn">Fetch</button></div>
+    </div>
+    <script>
+    const output = document.querySelector('.output');
+    const fetchBtn = document.querySelector('.fetch-btn');
+    
+    const xhr = new XMLHttpRequest();
+    let text = '';
+
+    fetchBtn.addEventListener('click', () => { 
+    
+    xhr.open('GET', 'https://api.github.com/users', true);
+    
+    xhr.onload = () => {
+        
+        if (xhr.status == 200)
+        {
+            const arrData = JSON.parse(xhr.responseText);
+            arrData.forEach((v, i) => {
+                text += `<div class="usersHeader">
+                    Users
+                <div class="user">
+                    <img src="${arrData[i].avatar_url}" width="70" height="70">
+                    <ul>
+                        <li>Login: ${arrData[i].login}</li>
+                        <li>ID: ${arrData[i].id}</li>
+                        </ul> <br>
+                </div>
+                    <div>`;
+                output.innerHTML = `${text}`;
+            }
+            )    
+        }
+    }
+    xhr.send();
+});
+    
+    </script>
+</body>
+</html>
